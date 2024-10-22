@@ -30,6 +30,14 @@ while (i < 10){
 
 ## Konstantina
 
+### New features
+
+Hellooooo!!!
+
+```{r}
+print("3229349")
+```
+
 ```{r}
 x = 123
 x

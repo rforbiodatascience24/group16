@@ -8,6 +8,13 @@ print("AAAAAAA")
 print("!!!!")
 ```
 
+## New feature
+
+```{r}
+p=1
+2*p
+```
+
 ## Eric
 
 Hello, this is just a test.

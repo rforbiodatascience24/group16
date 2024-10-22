@@ -23,7 +23,7 @@ Hello, this is just a test.
 print("Hello world!")
 ```
 
-### New feature 
+### New feature
 
 Hello. This is R for Bio Data Science
 

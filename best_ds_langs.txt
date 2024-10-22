@@ -8,19 +8,4 @@ Top 10 Bio Data Science Languages of ALL Time:
 4. has
 3. different
 2. tastes
-<<<<<<< HEAD
-<<<<<<< HEAD
-1. mysql
-=======
 1. Python is superior!
->>>>>>> 3e098bebe64956c27505c63bc17a3de3299eab61
-=======
-<<<<<<< HEAD
-1. rrrr
-=======
-1. Python is superior!
->>>>>>> 3e098bebe64956c27505c63bc17a3de3299eab61
-=======
-1. Python is superior!
->>>>>>> 3e098bebe64956c27505c63bc17a3de3299eab61
->>>>>>> 6c50339594649e4ddb4f1ecd50c3237433c08256

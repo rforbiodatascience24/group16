@@ -66,3 +66,9 @@ x
 ```{r}
 print("R for Bio Data Science!!")
 ```
+
+### New feature
+
+```{r}
+print(2+2)
+```

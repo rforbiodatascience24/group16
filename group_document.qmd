@@ -4,6 +4,11 @@
 
 ## Konstantina
 
+```{r}
+x = 123
+x
+```
+
 ## Lucía
 
 ## Jorge

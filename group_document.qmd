@@ -16,6 +16,18 @@ Hello, this is just a test.
 print("Hello world!")
 ```
 
+### New feature 
+
+Hello. This is R for Bio Data Science
+
+```{r}
+i <- 1
+while (i < 10){
+  print("Hello world!")
+  i <- i + 1
+}
+```
+
 ## Konstantina
 
 ```{r}

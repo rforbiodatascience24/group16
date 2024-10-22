@@ -6,6 +6,13 @@
 
 ## Lucía
 
+You are so funny guys
+
+```{r}
+x = 13
+x
+```
+
 ## Jorge
 
 ```{r}

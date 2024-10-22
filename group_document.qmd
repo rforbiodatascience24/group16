@@ -7,3 +7,7 @@
 ## Lucía
 
 ## Jorge
+
+```{r}
+print("R for Bio Data Science!!")
+```

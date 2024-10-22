@@ -1,6 +1,6 @@
 Top 10 Bio Data Science Languages of ALL Time:
 10. It is 
-9. Impossible
+9. this is terrible
 8. to rank them
 7. Because
 6. programming is subjective
@@ -8,8 +8,4 @@ Top 10 Bio Data Science Languages of ALL Time:
 4. has
 3. different
 2. tastes
-<<<<<<< HEAD
-1. mysql
-=======
-1. holacaracola
->>>>>>> 4db4c87bf627741c969dbe257a5540d48ec85a85
+1. R is superior!

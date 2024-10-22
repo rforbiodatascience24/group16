@@ -1,5 +1,13 @@
 ## Elena
 
+```{r}
+print("AAAAAAA")
+```
+
+```{r}
+print("!!!!")
+```
+
 ## Eric
 
 Hello, this is just a test.
@@ -10,6 +18,22 @@ print("Hello world!")
 
 ## Konstantina
 
+```{r}
+x = 123
+x
+```
+
 ## Lucía
 
+You are so funny guys
+
+```{r}
+x = 13
+x
+```
+
 ## Jorge
+
+```{r}
+print("R for Bio Data Science!!")
+```

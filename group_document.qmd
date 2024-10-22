@@ -25,6 +25,15 @@ x
 
 ## Lucía
 
+##### New feature
+
+Lucky hero of the week
+
+```{r}
+y = 1 + 1
+y
+```
+
 You are so funny guys
 
 ```{r}

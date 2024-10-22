@@ -2,6 +2,12 @@
 
 ## Eric
 
+Hello, this is just a test.
+
+```{r}
+print("Hello world!")
+```
+
 ## Konstantina
 
 ## Lucía

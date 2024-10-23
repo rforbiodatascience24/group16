@@ -7,13 +7,52 @@ editor: visual
 ### Load the packages
 
 ```{r}
+#| message = FALSE 
 library("tidyverse")
 library("broom")
 library("cowplot")
 ```
 
+We now load the gravier dataset:
+
 ```{r}
-data(gravier)
+load(file = "data/gravier.RData")
 ```
 
-We now load the gravier dataset:
+We get a tibble with our data.
+
+```{r}
+set.seed(676571)
+cancer_data=mutate(as_tibble(pluck(gravier,"x")),y=pluck(gravier,"y"),pt_id=1:length(pluck(gravier, "y")),age=round(rnorm(length(pluck(gravier,"y")),mean=55,sd=10),1))
+cancer_data=rename(cancer_data,event_label=y)
+cancer_data$age_group=cut(cancer_data$age,breaks=seq(10,100,by=10))
+cancer_data=relocate(cancer_data,c(pt_id,age,age_group,pt_id,event_label))
+```
+
+We can see the dataset. It consists of a tibble with dimensions $N$ = 168 and $M$ = 2909, where $N$ is the number of observations and $M$ the number of features. The label is `event_label`:
+
+```{r}
+cancer_data
+```
+
+First, we are going to look the data in PC coordinates. For this, we are going to use the function `prcomp`. We are only using the numeric columns (like the gene expression features) and we scale the data:
+
+```{r}
+pca_fit <- cancer_data |> 
+  select(where(is.numeric)) |> 
+  prcomp(scale = TRUE)
+```
+
+Then, we plot the data in PC coordinates:
+
+```{r}
+pca_fit |> 
+  augment(cancer_data) |> 
+  ggplot(aes(.fittedPC1, .fittedPC2,
+             colour = event_label)) + 
+  geom_point(alpha = 0.5) +
+  theme_minimal() +
+  theme(legend.position = "bottom", 
+        plot.title = element_text(hjust = 0.5)) +
+  labs(x = "PC1", y = "PC2", title = "Data in PC coordinates", colour = "Event label")
+```

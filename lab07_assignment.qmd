@@ -128,5 +128,5 @@ pca_fit |>
 ### Look at the data in PC coordinates
 
 ```{r}
-x = 1
+x = 13
 ```

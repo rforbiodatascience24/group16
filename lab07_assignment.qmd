@@ -4,7 +4,7 @@ format: html
 editor: visual
 ---
 
-### Load the packages 
+### Load the packages
 
 ```{r}
 library("tidyverse")

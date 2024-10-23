@@ -1,0 +1,16 @@
+---
+title: "Lab 5 Assignment: Group 16"
+format:
+  html:
+    embed-resources: true
+editor: visual
+---
+
+|                         |                |
+|:-----------------------:|:--------------:|
+| **Name of the student** | **Student ID** |
+|    Konstantina Gkopi    |    s243692     |
+|       Eric Torres       |    s243275     |
+|    Lucía de Lamadrid    |    s243311     |
+|     Jorge Santiago      |    s243310     |
+|      Elena Iriondo      |    s243312     |

@@ -1,132 +1,26 @@
 ---
-title: "Lab 7 Assignment: Group 16"
-format:
-  html:
-    embed-resources: true
+title: "lab07_assignment_group16"
+format: html
 editor: visual
 ---
 
-|                         |                |
-|:-----------------------:|:--------------:|
-| **Name of the student** | **Student ID** |
-|    Konstantina Gkopi    |    s243692     |
-|       Eric Torres       |    s243275     |
-|    Lucía de Lamadrid    |    s243311     |
-|     Jorge Santiago      |    s243310     |
-|      Elena Iriondo      |    s243312     |
+## Quarto
 
-### Load the packages
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
 
 ```{r}
-#| message = FALSE 
-library("tidyverse")
-library("broom")
-library("cowplot")
+1 + 1
 ```
 
-We now load the gravier dataset:
+You can add options to executable code like this
 
 ```{r}
-load(file = "data/gravier.RData")
+#| echo: false
+2 * 2
 ```
 
-We get a tibble with our data.
-
-```{r}
-set.seed(676571)
-
-cancer_data = mutate(
-  as_tibble(pluck(gravier,"x")),
-  y = pluck(gravier,"y"),
-  pt_id = 1:length(pluck(gravier, "y")),
-  age = round(rnorm(length(pluck(gravier, "y")), mean = 55, sd = 10), 1))
-
-cancer_data = rename(cancer_data,
-                   event_label = y)
-
-cancer_data$age_group = cut(cancer_data$age, 
-                            breaks = seq(10, 100, by = 10))
-
-cancer_data = relocate(cancer_data, c(pt_id, age, age_group, pt_id, event_label))
-```
-
-We can see the dataset. It consists of a tibble with dimensions $N$ = 168 and $M$ = 2909, where $N$ is the number of observations and $M$ the number of features. The label is `event_label`:
-
-```{r}
-cancer_data
-```
-
-### Calculate the PCA
-
-First, we are going to look the data in PC coordinates. For this, we are going to use the function `prcomp`. We are only using the numeric columns (like the gene expression features) and we scale the data:
-
-```{r}
-pca_fit <- cancer_data |> 
-  select(where(is.numeric)) |> 
-  prcomp(scale = TRUE)
-```
-
-Then, we plot the data in PC coordinates:
-
-```{r}
-pca_fit |> 
-  augment(cancer_data) |> 
-  ggplot(aes(.fittedPC1, .fittedPC2,
-             colour = event_label)) + 
-  geom_point(alpha = 0.5) +
-  scale_color_manual(
-    values = c(good = "green", 
-               poor = "darkred")) +
-  theme_minimal() +
-  theme(legend.position = "bottom", 
-        plot.title = element_text(hjust = 0.5)) +
-  labs(x = "PC1", y = "PC2", title = "Data in PC coordinates", colour = "Event label")
-```
-
-### Look at the data in PC coordinates
-
-```{r}
-# extract rotation matrix
-pca_fit |> 
-  tidy(matrix = "rotation")
-```
-
-Now, we look at it in the context of a plot with arrows to observe the magnitude of the variation in the context of the two principal components.
-
-(Jorge: I dont think this is a good plot for our dataset)
-
-```{r}
-arrow_style <- arrow(
-  angle = 20,
-  ends = "first",
-  type = "closed",
-  length = grid::unit(8, "pt")
-)
-
-#plot rotation matrix
-pca_fit |> 
-  tidy(matrix = "rotation") |> 
-  pivot_wider(names_from = "PC",
-              names_prefix = "PC",
-              values_from = "value") |> 
-  ggplot(aes(PC1, PC2)) +
-  geom_segment(xend = 0,
-               yend = 0,
-               arrow = arrow_style) +
-  geom_text(
-    aes(label = column),
-    hjust = 1,
-    nudge_x = -0.02,
-    color = "darkred"
-  ) +
-  xlim(-0.3, 0.25) +
-  ylim(-0.025, 0.025) +
-  theme_minimal()
-  
-```
-
-### Look at the data in PC coordinates
-
-```{r}
-x = 13
-```
+The `echo: false` option disables the printing of code (only output is displayed).

@@ -8,13 +8,6 @@ print("AAAAAAA")
 print("!!!!")
 ```
 
-## New feature
-
-```{r}
-p=1
-2*p
-```
-
 ## Eric
 
 Hello, this is just a test.
@@ -23,7 +16,7 @@ Hello, this is just a test.
 print("Hello world!")
 ```
 
-### New feature 
+### New feature
 
 Hello. This is R for Bio Data Science
 
@@ -72,10 +65,4 @@ x
 
 ```{r}
 print("R for Bio Data Science!!")
-```
-
-### New feature
-
-```{r}
-print(2+2)
 ```

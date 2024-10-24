@@ -1,8 +1,19 @@
 ---
-title: "group16_assignment"
-format: html
+title: "Lab 5 Assignment: Group 16"
+format:
+  html:
+    embed-resources: true
 editor: visual
 ---
+
+|                         |                |
+|:-----------------------:|:--------------:|
+| **Name of the student** | **Student ID** |
+|    Konstantina Gkopi    |    s243692     |
+|       Eric Torres       |    s243275     |
+|    Lucía de Lamadrid    |    s243311     |
+|     Jorge Santiago      |    s243310     |
+|      Elena Iriondo      |    s243312     |
 
 ### Load packages
 
@@ -13,13 +24,21 @@ library("broom")
 library("cowplot")
 ```
 
-We now see the $iris$ dataset. We can see the dataset. It consists of a tibble with dimensions $N$ = 150 and $M$ = 5, where $N$ is the number of observations and $M$ the number of features. The label is `species`:
+On this assignment our group will use git to work collaboratively on carrying out a principal component analysis on the $iris$ dataset. This is a tidy dataset, so we will not have to prepare the data before analysing it. The dataset consists of a tibble with dimensions $N$ = 150 and $M$ = 5, where $N$ is the number of observations and $M$ the number of features. The label is `species`:
 
 ```{r}
 iris
 ```
 
-First, we are going to look the data in PC coordinates. For this, we are going to use the function `prcomp`. We are only using the numeric columns (like the gene expression features) and we scale the data:
+Our PCA will be split into three steps:
+
+1.  Look at the data in PC coordinates.
+
+2.  Look at the rotation matrix.
+
+3.  Look at the variance explained by each PC.
+
+First, we are going to **look the data in PC coordinates**. For this, we are going to use the function `prcomp`. We are only using the numeric columns (like the gene expression features) and we scale the data:
 
 ```{r}
 pca_fit <- iris |>  
@@ -43,3 +62,38 @@ pca_fit |>
        title = "Data in PC coordinates", 
        colour = "Event label")
 ```
+
+Secondly, we will **look at the rotation matrix**. We employ the broom package to extract this matrix.
+
+```{r}
+# extract rotation matrix
+pca_fit %>%
+  tidy(matrix = "rotation")
+```
+
+We now visualise the matrix in the context of a plot.
+
+```{r}
+# define arrow style for plotting
+arrow_style <- arrow(
+  angle = 20, ends = "first", type = "closed", length = grid::unit(8, "pt")
+)
+
+# plot rotation matrix
+pca_fit %>%
+  tidy(matrix = "rotation") %>%
+  pivot_wider(names_from = "PC", names_prefix = "PC", values_from = "value") %>%
+  ggplot(aes(PC1, PC2)) +
+  geom_segment(xend = 0, yend = 0, arrow = arrow_style) +
+  geom_text(
+    aes(label = column),
+    hjust = 1, nudge_x = -0.02, 
+    color = "#904C2F"
+  ) +
+  xlim(-1, 1) + ylim(-1, 1) +
+  coord_fixed() + # fix aspect ratio to 1:1
+  theme_minimal_grid(12)
+
+```
+
+The plot shows us that the first principal component has high values for petal length and width, and sepal length. Sepal width is the variable with the "smallest" effect on it, which also happens to be negative. On the other hand, sepal width has the "strongest" effect on the second principal component, it being a negative one. Sepal length also has a negative effect on this component, whilst the petal measurements have an almost null effect on it.

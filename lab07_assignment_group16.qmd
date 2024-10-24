@@ -103,19 +103,32 @@ The plot shows us that the first principal component has high values for petal l
 Next, we examine how much variance each principal component explains. We will plot the variance explained by each principal component.
 
 ```{r}
+# Extract eigenvalues (variance explained by each PC)
+pca_fit |> 
+  tidy(matrix = 'eigenvalues')
+```
+
+```{r}
+# create a bar plot to show the percentage of variance
 pca_fit |> 
   tidy(matrix = "eigenvalues") |> 
-  ggplot(aes(PC, percent))+
-  geom_col(fill = "blue", alpha = 0.5)+
-  scale_x_continuous(breaks = 1:4)+
+  # Map 'PC' to x-axis and 'percent of variance' to y-axis
+  ggplot(aes(PC, percent)) +
+  geom_col(fill = "blue", alpha = 0.5) +
+  # Format the axis
+  scale_x_continuous(breaks = 1:4) +
   scale_y_continuous(
-  labels = scales::percent_format(),
-  expand = expansion(mult = c(0, 0.01)))+
-  theme_minimal_hgrid(12)+
+    labels = scales::percent_format(),
+    expand = expansion(mult = c(0, 0.01))) +
+  # Apply minimal theme with horizontal gridlines
+  theme_minimal_hgrid(12) +
   labs(
-  title = "Variance Explained by Principal Components",
-  x = "Principal Component",
-  y = "Percentage of Variance Explained"
+    title = "Variance Explained by Principal Components",
+    x = "Principal Component",
+    y = "Percentage of Variance Explained"
 )
-
 ```
+
+These results represent the summary of principal component analysis (PCA). The first principal component (PC) explains approximately 72.96% of the variance. The second PC explains 22.85% of the variance, while the third and fourth PCs explain progressively smaller amounts, 3.67% and 0.52%, respectively.
+
+The cumulative variance explained by the first two components is around 95.81%, suggesting that a reduced dimensionality using the first two components would retain most of the information from the original data.

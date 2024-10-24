@@ -42,6 +42,7 @@ Our PCA will be split into three steps:
 library("tidyverse") 
 library("broom") 
 library("cowplot")
+library("ggrepel")
 ```
 
 ### Look at the data in PC coordinates
@@ -95,7 +96,7 @@ pca_fit %>%
   pivot_wider(names_from = "PC", names_prefix = "PC", values_from = "value") %>%
   ggplot(aes(PC1, PC2)) +
   geom_segment(xend = 0, yend = 0, arrow = arrow_style) +
-  geom_text(
+  geom_text_repel(
     aes(label = column),
     hjust = 1, nudge_x = -0.02, 
     color = "#904C2F"

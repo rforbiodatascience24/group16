@@ -6,6 +6,7 @@ format:
 editor: visual
 ---
 
+
 |                         |                |
 |:-----------------------:|:--------------:|
 | **Name of the student** | **Student ID** |
@@ -23,9 +24,11 @@ PCA is a powerful dimensionality reduction technique that will help us visualize
 
 Additionally, on this assignment our group will use git to work collaboratively on carrying out the PCA on the $iris$ dataset. This is a tidy dataset, so we will not have to prepare the data before analysing it. The dataset consists of a tibble with dimensions $N$ = 150 and $M$ = 5, where $N$ is the number of observations and $M$ the number of features. The label is `species`:
 
+
 ```{r}
 head(iris)
 ```
+
 
 Our PCA will be split into three steps:
 
@@ -37,6 +40,7 @@ Our PCA will be split into three steps:
 
 ### Load the libraries
 
+
 ```{r}
 #| message = FALSE  
 library("tidyverse") 
@@ -44,9 +48,11 @@ library("broom")
 library("cowplot")
 ```
 
+
 ### Look at the data in PC coordinates
 
 First, we are going to **look the data in PC coordinates**. For this, we are going to use the function `prcomp`. We are only using the numeric columns (like the gene expression features) and we scale the data:
+
 
 ```{r}
 pca_fit <- iris |>  
@@ -54,7 +60,9 @@ pca_fit <- iris |>
   prcomp(scale = TRUE)
 ```
 
+
 Then, we plot the data in PC coordinates:
+
 
 ```{r}
 pca_fit |>    
@@ -71,9 +79,11 @@ pca_fit |>
        colour = "Event label")
 ```
 
+
 ### Look into the rotation matrix
 
 Secondly, we will **look at the rotation matrix**. We employ the broom package to extract this matrix.
+
 
 ```{r}
 # extract rotation matrix
@@ -81,7 +91,9 @@ pca_fit %>%
   tidy(matrix = "rotation")
 ```
 
+
 We now visualise the matrix in the context of a plot.
+
 
 ```{r}
 # define arrow style for plotting
@@ -106,11 +118,13 @@ pca_fit %>%
 
 ```
 
+
 The plot shows us that the first principal component has high values for petal length and width, and sepal length. Sepal width is the variable with the "smallest" effect on it, which also happens to be negative. On the other hand, sepal width has the "strongest" effect on the second principal component, it being a negative one. Sepal length also has a negative effect on this component, whilst the petal measurements have an almost null effect on it.
 
 ### Look at the variance explained by each PC
 
 Next, we examine how much variance each principal component explains. We will plot the variance explained by each principal component.
+
 
 ```{r}
 # Extract eigenvalues (variance explained by each PC)
@@ -139,6 +153,8 @@ pca_fit |>
 )
 ```
 
+
 These results represent the summary of principal component analysis (PCA). The first principal component (PC) explains approximately 72.96% of the variance. The second PC explains 22.85% of the variance, while the third and fourth PCs explain progressively smaller amounts, 3.67% and 0.52%, respectively.
 
 The cumulative variance explained by the first two components is around 95.81%, suggesting that a reduced dimensionality using the first two components would retain most of the information from the original data.
+

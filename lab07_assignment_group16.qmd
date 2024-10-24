@@ -97,3 +97,25 @@ pca_fit %>%
 ```
 
 The plot shows us that the first principal component has high values for petal length and width, and sepal length. Sepal width is the variable with the "smallest" effect on it, which also happens to be negative. On the other hand, sepal width has the "strongest" effect on the second principal component, it being a negative one. Sepal length also has a negative effect on this component, whilst the petal measurements have an almost null effect on it.
+
+### Look at the variance explained by each PC
+
+Next, we examine how much variance each principal component explains. We will plot the variance explained by each principal component.
+
+```{r}
+pca_fit |> 
+  tidy(matrix = "eigenvalues") |> 
+  ggplot(aes(PC, percent))+
+  geom_col(fill = "blue", alpha = 0.5)+
+  scale_x_continuous(breaks = 1:4)+
+  scale_y_continuous(
+  labels = scales::percent_format(),
+  expand = expansion(mult = c(0, 0.01)))+
+  theme_minimal_hgrid(12)+
+  labs(
+  title = "Variance Explained by Principal Components",
+  x = "Principal Component",
+  y = "Percentage of Variance Explained"
+)
+
+```

@@ -1,5 +1,5 @@
 ---
-title: "Lab 5 Assignment: Group 16"
+title: "Lab 7 Assignment: Group 16"
 format:
   html:
     embed-resources: true
@@ -15,19 +15,16 @@ editor: visual
 |     Jorge Santiago      |    s243310     |
 |      Elena Iriondo      |    s243312     |
 
-### Load packages
+### Introduction
+
+In this assignment, we will perform **Principal Component Analysis (PCA)** on the $iris$ dataset. This dataset comprises 150 samples from three different species of iris flowers (setosa, versicolor and virginica), being each of them characterised by four attributes: sepal length, sepal width, petal length and petal width.
+
+PCA is a powerful dimensionality reduction technique that will help us visualize high-dimensional data (in our case 4D) by transforming it into a lower-dimensional space while preserving as much variance as possible. Through this we aim to uncover the underlying structure of the data and improve our understanding of the relationships between the different iris species.
+
+Additionally, on this assignment our group will use git to work collaboratively on carrying out the PCA on the $iris$ dataset. This is a tidy dataset, so we will not have to prepare the data before analysing it. The dataset consists of a tibble with dimensions $N$ = 150 and $M$ = 5, where $N$ is the number of observations and $M$ the number of features. The label is `species`:
 
 ```{r}
-#| message = FALSE  
-library("tidyverse") 
-library("broom") 
-library("cowplot")
-```
-
-On this assignment our group will use git to work collaboratively on carrying out a principal component analysis on the $iris$ dataset. This is a tidy dataset, so we will not have to prepare the data before analysing it. The dataset consists of a tibble with dimensions $N$ = 150 and $M$ = 5, where $N$ is the number of observations and $M$ the number of features. The label is `species`:
-
-```{r}
-iris
+head(iris)
 ```
 
 Our PCA will be split into three steps:
@@ -37,6 +34,18 @@ Our PCA will be split into three steps:
 2.  Look at the rotation matrix.
 
 3.  Look at the variance explained by each PC.
+
+### Load the libraries
+
+```{r}
+#| message = FALSE  
+library("tidyverse") 
+library("broom") 
+library("cowplot")
+library("ggrepel")
+```
+
+### Look at the data in PC coordinates
 
 First, we are going to **look the data in PC coordinates**. For this, we are going to use the function `prcomp`. We are only using the numeric columns (like the gene expression features) and we scale the data:
 
@@ -63,6 +72,8 @@ pca_fit |>
        colour = "Event label")
 ```
 
+### Look into the rotation matrix
+
 Secondly, we will **look at the rotation matrix**. We employ the broom package to extract this matrix.
 
 ```{r}
@@ -85,14 +96,17 @@ pca_fit %>%
   pivot_wider(names_from = "PC", names_prefix = "PC", values_from = "value") %>%
   ggplot(aes(PC1, PC2)) +
   geom_segment(xend = 0, yend = 0, arrow = arrow_style) +
-  geom_text(
+  geom_text_repel(
     aes(label = column),
     hjust = 1, nudge_x = -0.02, 
     color = "#904C2F"
   ) +
   xlim(-1, 1) + ylim(-1, 1) +
   coord_fixed() + # fix aspect ratio to 1:1
-  theme_minimal_grid(12)
+  theme_minimal_grid(12) +
+  labs(
+    title = "Arrows plot"
+  )
 
 ```
 

@@ -103,7 +103,10 @@ pca_fit %>%
   ) +
   xlim(-1, 1) + ylim(-1, 1) +
   coord_fixed() + # fix aspect ratio to 1:1
-  theme_minimal_grid(12)
+  theme_minimal_grid(12) +
+  labs(
+    title = "Arrows plot"
+  )
 
 ```
 
